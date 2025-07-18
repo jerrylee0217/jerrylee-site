@@ -1,74 +1,369 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>李俊煌 Jerry Lee｜Web3 x 華人文化 x 宇宙願景</title>
-  <style>
-    body { font-family: "Microsoft JhengHei", sans-serif; background: #f9f9f9; margin: 0; padding: 0; color: #333; }
-    header { background: linear-gradient(to right,#ff6a00,#ee0979); color:#fff; padding:40px 20px; text-align:center; }
-    header h1 { margin:0; font-size:2.4em; }
-    header h2 { margin:10px 0 0; font-weight:normal; font-size:1.2em; }
-    main { padding:15px; max-width:800px; margin:auto; background:#fff; }
-    footer { text-align:center; padding:15px; font-size:0.9em; color:#777; margin-top:30px; }
-    a { color:#d32f2f; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    section { margin-top:2em; }
-    section h3 { font-size:1.6em; color:#0a7081; text-align:center; margin-bottom:0.8em; }
-    section h4 { font-size:1.2em; color:#2b547e; margin-bottom:0.5em; }
-    p, ul, ol { font-size:1em; line-height:1.5; }
-    ul, ol { padding-left:1.2em; margin-bottom:1em; }
-    img { max-width:100%; height:auto; }
-    .nft-item img { width:120px; border:1px solid #ddd; border-radius:4px; margin-right:10px; }
-    #nft-legacy img { width:150px; margin:10px auto; display:block; }
-    #event-gallery img, #behind-scenes img { width:140px; margin:5px; border-radius:4px; }
-    @media screen and (max-width:768px) {
-      header h1 { font-size:1.8em; }
-      header h2 { font-size:1em; }
-      main { padding:10px; }
-      section h3 { font-size:1.3em; }
-      section h4 { font-size:1.1em; }
-      p, ul, ol { font-size:0.95em; }
-      .nft-item { flex-direction:column; align-items:center; }
-      .nft-item img { width:80%; margin-bottom:10px; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>李俊煌（Jerry Lee）｜資深品牌行銷顧問</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Professional Earth Tones -->
+    <!-- Application Structure Plan: 本專案為個人資歷介紹SPA。結構依序為：1. 封面（Hero Section）展示個人品牌與核心定位。2. 關於我（About Me）闡述顧問哲學與總體資歷。3. 企業與平台（Corporate & Platform Roles）新增區塊，介紹BRAND TAIWAN INT與NFTsVERSE ART的角色。4. 關鍵資歷與代表成就（Key Achievements）以時間軸形式呈現重要職位與成果。5. 核心能力（Core Strengths）條列專業技能。6. 聯絡方式（Contact）提供聯絡資訊。此結構旨在清晰、有條理地展示個人資歷，突出跨界與創新特點，並明確個人與企業角色的關係，方便潛在合作夥伴或雇主快速了解。 -->
+    <!-- Visualization & Content Choices: 1. 關鍵資歷與代表成就：使用HTML/CSS卡片和時間軸視覺元素，清晰呈現每個階段的職位與關鍵成就。2. 核心能力：使用列表和簡潔圖標（Unicode字符），直觀展示各項能力。3. 企業與平台：使用獨立卡片介紹各企業實體及其功能。所有視覺元素均未使用SVG或Mermaid。 -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans TC', sans-serif;
+            background-color: #F8F5EF; /* Light earthy background */
+            color: #333333;
+        }
+        .bg-accent-dark { background-color: #5C4033; } /* Dark Coffee Brown */
+        .text-accent-dark { color: #5C4033; }
+        .bg-accent-light { background-color: #A0522D; } /* Sienna Brown */
+        .text-accent-light { color: #A0522D; }
+        .border-accent { border-color: #A0522D; }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #5C4033;
+            margin-bottom: 2.5rem;
+            text-align: center;
+        }
+        .nav-link {
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #A0522D;
+        }
+        .experience-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.15);
+        }
+        /* Timeline specific styles for mobile/desktop */
+        .timeline-item {
+            position: relative;
+            padding-bottom: 3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: #A0522D;
+            z-index: 0;
+        }
+        .timeline-item:last-child::before {
+            height: calc(100% - 3rem); /* Adjust last item line height */
+        }
+        .timeline-dot {
+            position: absolute;
+            left: calc(1rem - 6px); /* Adjust to center dot on line */
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background-color: #A0522D;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        @media (min-width: 768px) {
+            .timeline-item::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline-dot {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .timeline-item:nth-child(odd) .experience-card {
+                margin-left: auto;
+                margin-right: calc(50% + 1rem); /* Push card to left of line */
+            }
+            .timeline-item:nth-child(even) .experience-card {
+                margin-right: auto;
+                margin-left: calc(50% + 1rem); /* Push card to right of line */
+            }
+        }
+    </style>
 </head>
-<body>
-<header>
-  <h1>李俊煌 Jerry Lee</h1>
-  <h2>Web3 數位文化先鋒 ｜ 華人文化星際傳承者</h2>
-</header>
-<main>
-  <section id="introduction">
-    <h3>開創 Web3 華人文化新紀元</h3>
-    <p>我是 <strong>李俊煌 (Jerry Lee)</strong>，作為 <strong>NFTsVERSE ART</strong> 與 <strong>BRAND TAIWAN</strong> 創辦人及《愛拚才會贏 NFT》總策劃人，運用區塊鏈與數位科技，為華人文化資產賦予永續生命。</p>
-  </section>
-  <section id="nft-legacy">
-    <h3>《愛拚才會贏 NFT》與 JCU 吉馬陳元宇宙</h3>
-    <img src="YOUR_BASE64_OR_URL_STATIC" alt="愛拚才會贏 NFT 靜態顯示圖">
-    <p>首度將經典台語金曲<em>《愛拚才會贏》</em>與區塊鏈、光影光相系統深度融合，打造 Web3 數位傳承典範。</p>
-    <p>透過 <strong>JCU 吉馬陳元宇宙</strong>，已發行《愛拚才會贏》及未來願景《落雨聲》，賦予旋律永恆生命。</p>
-    <h4>愛拚才會贏 NFT：傳世之寶、隽永不朽的四大特色</h4>
-    <ol>
-      <li><strong>來自大眾的記憶：</strong>傳唱逾15億次，凝聚華人社會精神DNA，具典範文化遺產性質。</li>
-      <li><strong>技術與時代的融合：</strong>視覺、聲音、語言與精神凍結上鏈，成為跨時代數位文化遺產。</li>
-      <li><strong>未來視野與宇宙坐標：</strong>納入火星移民敘事，成為星際文化印記代表。</li>
-      <li><strong>策劃人的願景與執行力：</strong>從授權、公關到推廣，打造可複製文化模型。</li>
-    </ol>
-    <h4>愛拚才會贏NFT 影音紀錄</h4>
-    <ul>
-      <li><a href="https://www.youtube.com/watch?v=znFs31pDnsk&t=12s" target="_blank">全世界第一個台語NFT幕後故事</a></li>
-      <li><a href="https://www.youtube.com/watch?v=Ng1AZZWOxG4" target="_blank">NFT發佈國際記者會</a></li>
-      <li><a href="https://www.youtube.com/watch?v=DpQNsBeZMu0" target="_blank">江蕙十年磨一劍 NFT再造</a></li>
-      <li><a href="https://www.youtube.com/watch?v=V90rMqit61Y" target="_blank">李俊煌談台語金曲與火星願景</a></li>
-      <li><a href="https://www.youtube.com/watch?v=aKNg63RT5vc&t=16s" target="_blank">陳維祥力推台語NFT</a></li>
-    </ul>
-  </section>
-  <!-- 其他區塊保留 -->
-</main>
-<footer>
-  <p>聯絡：jerrylee0217@gmail.com © 2025 李俊煌 Jerry Lee</p>
-</footer>
+<body class="antialiased">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-accent-dark">李俊煌（Jerry Lee）</h1>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link text-gray-700 font-medium">關於我</a>
+                <a href="#corporate-roles" class="nav-link text-gray-700 font-medium">企業與平台</a>
+                <a href="#achievements" class="nav-link text-gray-700 font-medium">代表成就</a>
+                <a href="#strengths" class="nav-link text-gray-700 font-medium">核心能力</a>
+                <a href="#contact" class="nav-link text-gray-700 font-medium">聯絡我</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="min-h-screen flex items-center bg-f8f5ef">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-4xl md:text-6xl font-bold text-accent-dark leading-tight mb-4">
+                    李俊煌（Jerry Lee）<br>資深品牌行銷顧問
+                </h2>
+                <p class="text-lg md:text-xl text-gray-700 mb-8 max-w-4xl mx-auto">
+                    台灣頂尖品牌行銷顧問，擁有超過20年橫跨科技、文化與連鎖產業的實戰經驗，並積極布局AI與Web3應用，融合創業輔導、品牌擴張、數位行銷與文化資產策劃於一身，為亞洲區少數能統合人機共創策略與數位資產經濟的創新顧問。
+                </p>
+                <a href="#about" class="bg-accent-light text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105">了解更多</a>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="section-title">關於我：我的行銷哲學</h2>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    我是李俊煌（Jerry Lee），一位深信「**對細節的堅持，是成功的秘密**」的品牌行銷顧問。我的職業生涯，橫跨了數位行銷、連鎖餐飲品牌管理、以及最新的NFT數位藝術資產與AI人機協作應用領域。我擅長在複雜多變的市場環境中，運用360度全方位的策略思維，將看似不可能的挑戰，轉化為實質的商業成功。
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    我的實務基礎，來自於在台灣知名人力銀行網路行銷公司擔任連鎖品牌數位行銷主管的經驗，以及在全球15個國家、超過1500個餐飲集團品牌（包括鮮芋仙的母公司休閒國聯集團）擔任行銷總監的深厚積累。這些經歷，讓我具備了國際化的視野、跨文化溝通的能力，以及對市場趨勢的敏銳洞察力。
+                </p>
+            </div>
+        </section>
+
+        <section id="corporate-roles" class="py-20 bg-f8f5ef">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="section-title">企業與平台角色</h2>
+                <p class="text-center text-gray-700 mb-12">我透過以下企業實體與平台，將我的專業理念與實踐推向更廣闊的領域。</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                        <h3 class="text-xl font-bold text-accent-dark mb-2">BRAND TAIWAN INT</h3>
+                        <p class="text-lg text-accent-light mb-2">企業法人角色</p>
+                        <p class="text-gray-700">作為 BRAND TAIWAN INT 的核心成員，我致力於推動台灣品牌走向國際，透過策略性品牌規劃與市場拓展，協助台灣優質產品與服務在全球市場發光發熱。</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                        <h3 class="text-xl font-bold text-accent-dark mb-2">NFTsVERSE ART</h3>
+                        <p class="text-lg text-accent-light mb-2">文化科技創新平台</p>
+                        <p class="text-gray-700">NFTsVERSE ART 是一個融合文化與科技的創新平台，專注於將傳世藝術品與文化資產數位化為 NFT，推動藝術投資大眾化，並在Web3時代重新定義文化價值。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="py-20 bg-white">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <h2 class="section-title">關鍵資歷與代表成就</h2>
+                <p class="text-center text-gray-700 mb-12">以下是我職業生涯中的重要里程碑與代表性成就，展現跨界與創新的實績。</p>
+
+                <div class="relative px-4 md:px-0">
+                    <!-- Timeline vertical line for desktop -->
+                    <div class="absolute inset-y-0 left-1/2 w-0.5 bg-accent-light transform -translate-x-1/2 hidden md:block"></div>
+                    
+                    <!-- Experience Item: 科技行銷經歷｜1111人力銀行創業部主管 -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">科技行銷經歷</h3>
+                                <p class="text-lg text-accent-light mb-2">1111人力銀行創業部主管</p>
+                                <p class="text-gray-700">主導數位平台建置、創業加盟網營運與全國性品牌招商推廣，奠定其科技導向的品牌整合實力。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">1111人力銀行</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: 品牌逆勢突圍｜上海撈王火鍋品牌創始股東與品牌顧問（2010–2014） -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row-reverse items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">2010–2014</h3>
+                                <p class="text-lg text-accent-light mb-2">品牌逆勢突圍｜上海撈王火鍋品牌創始股東與品牌顧問</p>
+                                <p class="text-gray-700">在撈王僅有兩家門市、並面臨上海口蹄疫疫情與業績低迷的艱困階段，擔任品牌創新升級管理顧問與創始股東，成功引入小S參與投資與話題行銷，導入資本擴張與營運優化機制，協助品牌逆勢崛起為區域火鍋霸主，後續更成為全國領先的火鍋品牌之一。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">撈王火鍋</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: 連鎖品牌出海策劃｜O2O × 中國落地成功案例 (胖達人、正豪大雞排、鮮芋仙) -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">連鎖品牌出海策劃</h3>
+                                <p class="text-lg text-accent-light mb-2">O2O × 中國落地成功案例</p>
+                                <p class="text-gray-700">成功協助胖達人、正豪大雞排、鮮芋仙等台灣品牌進軍中國市場，打造上海南京路萬人開幕熱潮，堪稱O2O病毒式行銷經典。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">胖達人等</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: 文化科技創新｜《愛拚才會贏 NFT》策劃總監 -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row-reverse items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">文化科技創新</h3>
+                                <p class="text-lg text-accent-light mb-2">《愛拚才會贏 NFT》策劃總監</p>
+                                <p class="text-gray-700">結合台語金曲與NFT技術，打造全球第一個台語數位文化資產，並發起「火星文化典藏行動」，成為文化與Web3融合的里程碑。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">愛拚才會贏 NFT</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: 藝術數位資產化｜故宮國寶級NFT策展人 -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">藝術數位資產化</h3>
+                                <p class="text-lg text-accent-light mb-2">故宮國寶級NFT策展人</p>
+                                <p class="text-gray-700">與勝大莊文化集團合作，成功策劃如米芾書法《試賜茶樂章》、乾隆翡翠御璽等七件傳世國寶NFT發行，推動藝術投資大眾化與文化價值上鏈。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">故宮國寶NFT</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: 宇宙數位文化典藏協會｜發起人之一 -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row-reverse items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">宇宙數位文化典藏協會</h3>
+                                <p class="text-lg text-accent-light mb-2">發起人之一</p>
+                                <p class="text-gray-700">倡議建立以文化傳承與人機協作為核心的公益平台，致力於保存人類文明藝術資產，並建立跨星球文化記憶鏈。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full mt-4 md:mt-0">
+                            <div class="text-2xl font-bold text-accent-light md:hidden">文化典藏協會</div>
+                        </div>
+                    </div>
+
+                    <!-- Experience Item: AI × 人機共創應用專家 -->
+                    <div class="timeline-item mb-12 flex flex-col md:flex-row items-center w-full">
+                        <div class="timeline-dot hidden md:block"></div>
+                        <div class="md:w-1/2 md:pr-8 md:text-right w-full">
+                            <div class="bg-white p-6 rounded-lg shadow-lg experience-card">
+                                <h3 class="text-xl font-bold text-accent-dark mb-2">AI × 人機共創應用專家</h3>
+                                <p class="text-lg text-accent-light mb-2">擅長導入AI協作於創意產業</p>
+                                <p class="text-gray-700">深耕AI工具在品牌策劃、內容生成、虛實整合等領域的應用，具備「AI協作導演」、「人機品牌顧問」等跨界實績，並逐步推動AI協作制度化與產業應用框架。</p>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 md:pl-8 md:text-left w-full mt-4 md:mt-0">
+                            <div class="2xl font-bold text-accent-light md:hidden">AI應用專家</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="strengths" class="py-20 bg-f8f5ef">
+            <div class="container mx-auto px-6 max-w-4xl">
+                <h2 class="section-title">我的核心能力</h2>
+                <p class="text-center text-gray-700 mb-12">我將理論與實踐完美結合，擅長在複雜環境中創造價值。</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">💡</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">前瞻洞察與策略規劃</h3>
+                            <p class="text-gray-700">精準預判市場趨勢，將品牌痛點轉化為創新策略。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">🎯</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">360度全方位行銷</h3>
+                            <p class="text-gray-700">整合線上線下、社群媒體、名人效應，打造無縫行銷閉環。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">🤝</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">資源整合與危機處理</h3>
+                            <p class="text-gray-700">善用在地人脈，化解法規審批難題，確保大型活動安全與成功。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">🌐</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">跨國市場與文化溝通</h3>
+                            <p class="text-gray-700">具備全球15國餐飲品牌經驗，精通跨文化溝通與在地化策略。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">📈</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">數位行銷與O2O實戰</h3>
+                            <p class="text-gray-700">精通社群媒體運營、流量轉化，擅長打造線上線下聯動體驗。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">💎</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">對細節的極致堅持</h3>
+                            <p class="text-gray-700">深信魔鬼藏在細節裡，每一個環節都力求完美，是成功的秘密。</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">🤖</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">AI人機協作應用</h3>
+                            <p class="text-gray-700">深耕AI工具在品牌策劃、內容生成、虛實整合等領域的應用。</p>
+                        </div>
+                    </div>
+                     <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                        <span class="text-accent-light text-3xl mr-4">🔗</span>
+                        <div>
+                            <h3 class="text-xl font-bold text-accent-dark mb-2">Web3與文化資產策劃</h3>
+                            <p class="text-gray-700">積極布局NFT與區塊鏈，推動文化資產數位化與價值上鏈。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-accent-dark text-white">
+            <div class="container mx-auto px-6 text-center max-w-3xl">
+                <h2 class="text-4xl font-bold mb-6">聯絡李俊煌（Jerry Lee）</h2>
+                <p class="text-lg mb-8">期待與您一同創造下一個品牌奇蹟！</p>
+                <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="mailto:jerrylee0217@gmail.com" class="bg-accent-light text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                        <span class="mr-2">✉️</span> 電子郵件
+                    </a>
+                    <a href="https://www.linkedin.com/in/%E4%BF%8A%E7%85%8C-%E6%9D%8E-a37581a3/" target="_blank" class="bg-accent-light text-white font-bold py-3 px-8 rounded-full hover:bg-opacity-90 transition-transform transform hover:scale-105">
+                        <span class="mr-2">🔗</span> LinkedIn
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-333333 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 李俊煌（Jerry Lee） - 資深品牌行銷顧問</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
