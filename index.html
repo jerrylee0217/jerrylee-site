@@ -9,8 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <!-- Chosen Palette: Professional Earth Tones -->
-    <!-- Application Structure Plan: 本專案為個人資歷介紹SPA。結構依序為：1. 封面（Hero Section）展示個人品牌與核心定位。2. 關於我（About Me）闡述顧問哲學與總體資歷。3. 企業與平台（Corporate & Platform Roles）新增區塊，介紹BRAND TAIWAN INT與NFTsVERSE ART的角色。4. 關鍵資歷與代表成就（Key Achievements）以時間軸形式呈現重要職位與成果。5. 核心能力（Core Strengths）條列專業技能。6. 聯絡方式（Contact）提供聯絡資訊。此結構旨在清晰、有條理地展示個人資歷，突出跨界與創新特點，並明確個人與企業角色的關係，方便潛在合作夥伴或雇主快速了解。 -->
-    <!-- Visualization & Content Choices: 1. 關鍵資歷與代表成就：使用HTML/CSS卡片和時間軸視覺元素，清晰呈現每個階段的職位與關鍵成就。2. 核心能力：使用列表和簡潔圖標（Unicode字符），直觀展示各項能力。3. 企業與平台：使用獨立卡片介紹各企業實體及其功能。所有視覺元素均未使用SVG或Mermaid。 -->
+    <!-- Application Structure Plan: 本專案為個人資歷介紹SPA。結構依序為：1. 封面（Hero Section）展示個人品牌與核心定位。2. 關於我（About Me）闡述顧問哲學與總體資歷。3. 企業與平台（Corporate & Platform Roles）新增區塊，介紹BRAND TAIWAN INT與NFTsVERSE ART的角色。4. 關鍵資歷與代表成就（Key Achievements）以時間軸形式呈現重要職位與成果。5. 核心能力（Core Strengths）條列專業技能。6. 與李俊煌對話 (New LLM Section)。7. 聯絡方式（Contact）提供聯絡資訊。此結構旨在清晰、有條理地展示個人資歷，突出跨界與創新特點，並明確個人與企業角色的關係，方便潛在合作夥伴或雇主快速了解。 -->
+    <!-- Visualization & Content Choices: 1. 關鍵資歷與代表成就：使用HTML/CSS卡片和時間軸視覺元素，清晰呈現每個階段的職位與關鍵成就。2. 核心能力：使用列表和簡潔圖標（Unicode字符），直觀展示各項能力。3. 企業與平台：使用獨立卡片介紹各企業實體及其功能。4. 與李俊煌對話：包含文本輸入框和按鈕觸發Gemini API調用，展示LLM生成的資歷相關問答，目標是提供互動式知識探索。所有視覺元素均未使用SVG或Mermaid。 -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
@@ -89,6 +89,17 @@
                 margin-left: calc(50% + 1rem); /* Push card to right of line */
             }
         }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #A0522D;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -96,11 +107,12 @@
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <h1 class="text-xl font-bold text-accent-dark">李俊煌（Jerry Lee）</h1>
-            <div class="hidden md:flex space-x-8">
+            <div class="hidden md:flex space-x-4 text-sm"> <!-- Adjusted space-x and text size -->
                 <a href="#about" class="nav-link text-gray-700 font-medium">關於我</a>
                 <a href="#corporate-roles" class="nav-link text-gray-700 font-medium">企業與平台</a>
                 <a href="#achievements" class="nav-link text-gray-700 font-medium">代表成就</a>
                 <a href="#strengths" class="nav-link text-gray-700 font-medium">核心能力</a>
+                <a href="#ask-jerry" class="nav-link text-gray-700 font-medium">與我對話</a> <!-- Shortened text -->
                 <a href="#contact" class="nav-link text-gray-700 font-medium">聯絡我</a>
             </div>
         </nav>
@@ -268,66 +280,88 @@
             </div>
         </section>
 
-        <section id="strengths" class="py-20 bg-f8f5ef">
+        <section id="strengths" class="py-20 bg-white">
             <div class="container mx-auto px-6 max-w-4xl">
                 <h2 class="section-title">我的核心能力</h2>
                 <p class="text-center text-gray-700 mb-12">我將理論與實踐完美結合，擅長在複雜環境中創造價值。</p>
                 <div class="grid md:grid-cols-2 gap-8">
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">💡</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">前瞻洞察與策略規劃</h3>
                             <p class="text-gray-700">精準預判市場趨勢，將品牌痛點轉化為創新策略。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">🎯</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">360度全方位行銷</h3>
                             <p class="text-gray-700">整合線上線下、社群媒體、名人效應，打造無縫行銷閉環。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">🤝</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">資源整合與危機處理</h3>
                             <p class="text-gray-700">善用在地人脈，化解法規審批難題，確保大型活動安全與成功。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">🌐</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">跨國市場與文化溝通</h3>
                             <p class="text-gray-700">具備全球15國餐飲品牌經驗，精通跨文化溝通與在地化策略。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">📈</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">數位行銷與O2O實戰</h3>
                             <p class="text-gray-700">精通社群媒體運營、流量轉化，擅長打造線上線下聯動體驗。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">💎</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">對細節的極致堅持</h3>
                             <p class="text-gray-700">深信魔鬼藏在細節裡，每一個環節都力求完美，是成功的秘密。</p>
                         </div>
                     </div>
-                    <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">🤖</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">AI人機協作應用</h3>
                             <p class="text-gray-700">深耕AI工具在品牌策劃、內容生成、虛實整合等領域的應用。</p>
                         </div>
                     </div>
-                     <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                     <div class="bg-f8f5ef p-6 rounded-lg shadow-md flex items-start">
                         <span class="text-accent-light text-3xl mr-4">🔗</span>
                         <div>
                             <h3 class="text-xl font-bold text-accent-dark mb-2">Web3與文化資產策劃</h3>
                             <p class="text-gray-700">積極布局NFT與區塊鏈，推動文化資產數位化與價值上鏈。</p>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ask-jerry" class="py-20 bg-f8f5ef">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">與李俊煌對話 ✨</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-8">對我的資歷與經驗有疑問嗎？在這裡向我提問，我將根據個人檔案內容為您解答！</p>
+                <div class="bg-white p-8 rounded-lg shadow-lg max-w-2xl mx-auto">
+                    <div class="mb-4">
+                        <label for="questionInput" class="block text-gray-700 text-sm font-bold mb-2">您的問題：</label>
+                        <textarea id="questionInput" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline resize-none" placeholder="例如：您在撈王火鍋的經歷中，最大的成就是什麼？"></textarea>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <button id="askButton" class="bg-accent-light hover:bg-opacity-90 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline flex items-center">
+                            <span id="buttonText">✨ 詢問李俊煌 ✨</span>
+                            <div id="loadingSpinner" class="loading-spinner ml-2 hidden"></div>
+                        </button>
+                    </div>
+                    <div id="responseArea" class="bg-gray-50 p-4 rounded-md border border-gray-200 min-h-[100px] text-gray-800">
+                        <p class="text-gray-500">答案將顯示在此處。</p>
                     </div>
                 </div>
             </div>
@@ -356,12 +390,95 @@
     </footer>
 
     <script>
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 });
+            });
+
+            // Gemini API Integration
+            const askButton = document.getElementById('askButton');
+            const questionInput = document.getElementById('questionInput');
+            const responseArea = document.getElementById('responseArea');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const buttonText = document.getElementById('buttonText');
+
+            const fullProfileContext = `
+                李俊煌（Jerry Lee）的個人資歷：
+                定位：資深品牌行銷顧問・跨界創新策劃人・AI人機協作應用專家。
+                總體描述：台灣頂尖品牌行銷顧問，超過20年橫跨科技、文化與連鎖產業實戰經驗，積極布局AI與Web3應用，融合創業輔導、品牌擴張、數位行銷與文化資產策劃，為亞洲區少數能統合人機共創策略與數位資產經濟的創新顧問。
+
+                關鍵資歷與代表成就：
+                - 科技行銷經歷｜1111人力銀行創業部主管：主導數位平台建置、創業加盟網營運與全國性品牌招商推廣，奠定科技導向的品牌整合實力。
+                - 連鎖品牌出海策劃｜O2O × 中國落地成功案例：成功協助胖達人、正豪大雞排、鮮芋仙等台灣品牌進軍中國市場，打造上海南京路萬人開幕熱潮，堪稱O2O病毒式行銷經典。
+                - 品牌逆勢突圍｜上海撈王火鍋品牌創始股東與品牌顧問（2010–2014）：在撈王僅有兩家門市、面臨上海口蹄疫疫情與業績低迷艱困階段，擔任品牌創新升級管理顧問與創始股東，成功引入小S參與投資與話題行銷，導入資本擴張與營運優化機制，協助品牌逆勢崛起為區域火鍋霸主，後續更成為全國領先的火鍋品牌之一。
+                - 文化科技創新｜《愛拚才會贏 NFT》策劃總監：結合台語金曲與NFT技術，打造全球第一個台語數位文化資產，並發起「火星文化典藏行動」，成為文化與Web3融合的里程碑。
+                - 藝術數位資產化｜故宮國寶級NFT策展人：與勝大莊文化集團合作，成功策劃如米芾書法《試賜茶樂章》、乾隆翡翠御璽等七件傳世國寶NFT發行，推動藝術投資大眾化與文化價值上鏈。
+                - 宇宙數位文化典藏協會｜發起人之一：倡議建立以文化傳承與人機協作為核心的公益平台，致力於保存人類文明藝術資產，並建立跨星球文化記憶鏈。
+                - AI × 人機共創應用專家｜擅長導入AI協作於創意產業：深耕AI工具在品牌策劃、內容生成、虛實整合等領域的應用，具備「AI協作導演」、「人機品牌顧問」等跨界實績，並逐步推動AI協作制度化與產業應用框架。
+
+                核心能力：
+                - 前瞻洞察與策略規劃：精準預判市場趨勢，將品牌痛點轉化為創新策略。
+                - 360度全方位行銷：整合線上線下、社群媒體、名人效應，打造無縫行銷閉環。
+                - 資源整合與危機處理：善用在地人脈，化解法規審批難題，確保大型活動安全與成功。
+                - 跨國市場與文化溝通：具備全球15國餐飲品牌經驗，精通跨文化溝通與在地化策略。
+                - 數位行銷與O2O實戰：精通社群媒體運營、流量轉化，擅長打造線上線下聯動體驗。
+                - 對細節的極致堅持：深信魔鬼藏在細節裡，每一個環節都力求完美，是成功的秘密。
+                - AI人機協作應用：深耕AI工具在品牌策劃、內容生成、虛實整合等領域的應用。
+                - Web3與文化資產策劃：積極布局NFT與區塊鏈，推動文化資產數位化與價值上鏈。
+
+                企業與平台角色：
+                - BRAND TAIWAN INT：核心成員，致力於推動台灣品牌走向國際，透過策略性品牌規劃與市場拓展，協助台灣優質產品與服務在全球市場發光發熱。
+                - NFTsVERSE ART：文化科技創新平台，專注於將傳世藝術品與文化資產數位化為 NFT，推動藝術投資大眾化，並在Web3時代重新定義文化價值。
+            `;
+
+            askButton.addEventListener('click', async () => {
+                const prompt = questionInput.value.trim();
+                if (!prompt) {
+                    responseArea.innerHTML = '<p class="text-red-500">請輸入您的問題。</p>';
+                    return;
+                }
+
+                responseArea.innerHTML = '<p class="text-gray-500">正在思考中...</p>';
+                loadingSpinner.classList.remove('hidden');
+                buttonText.classList.add('hidden');
+                askButton.disabled = true;
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: `請根據以下李俊煌（Jerry Lee）的個人資歷內容，回答我的問題。如果資訊不在提供的內容中，請說明您無法回答。\n\n個人資歷內容：\n${fullProfileContext}\n\n我的問題是：${prompt}` }] });
+                    
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will automatically provide this in runtime
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        responseArea.innerHTML = `<p>${text}</p>`;
+                    } else {
+                        responseArea.innerHTML = '<p class="text-red-500">抱歉，未能獲得有效的回答。請再試一次或換個問題。</p>';
+                    }
+                } catch (error) {
+                    console.error('Error calling Gemini API:', error);
+                    responseArea.innerHTML = '<p class="text-red-500">發生錯誤，請檢查網路連線或稍後再試。</p>';
+                } finally {
+                    loadingSpinner.classList.add('hidden');
+                    buttonText.classList.remove('hidden');
+                    askButton.disabled = false;
+                }
             });
         });
     </script>
